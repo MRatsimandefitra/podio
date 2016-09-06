@@ -22,8 +22,7 @@ require_once('PodioAPI.php');
 
 //Credentials defined in config.php
 Podio::setup(CLIENT_ID, CLIENT_SECRET);
-Podio::authenticate_with_app(APP_ID, APP_TOKEN); 
-
+Podio::authenticate_with_app(PROJECTS_ID, PROJECTS_TOKEN); 
 
 
 if(count($_POST) > 0){
@@ -35,7 +34,7 @@ if(count($_POST) > 0){
 			break;
 		case 'item.create':
 			PodioItem::create($_POST['item_id'], array('fields' => array(
-			  "Category" => "New"
+			  "category" => "New"
 			)));
 				
 			break;

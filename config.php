@@ -1,10 +1,15 @@
 <?php
-define("CLIENT_ID", "test-vz8bxd");
-define("CLIENT_SECRET","anwEF1w3nnXLkb7BGcIQXf60NJeTo4HJr9A9aivFxHJQuqbOpkv0CoiNqD7tNL8J");
+define("CLIENT_ID", "projects-ahz2a6");
+define("CLIENT_SECRET","5LshHw5SpdqwrHui1yCGfjAgKpcnypPzTlzdndjIYHNc7uY87kBGubGQ2gW0CZLu");
 
-define("APP_ID",13781550);
-define("APP_TOKEN","5959667d7fa944cbbd4351c6cdb66158");
+/*define("CLIENT_SECRET","xlbkEFBJNpeUQ3zklD8VP4ooOgCtiA1SKHSDy8gICDPRDBOZqiOVnDYzkWRiMpev");
 
-define("APP_ID_MILES",13781571);
-define("APP_TOKEN_MILES","5aac7675bd814c799accd4ddddb2170f");
+define("CLIENT_ID", "test-bg20qb");
+define("CLIENT_SECRET","xlbkEFBJNpeUQ3zklD8VP4ooOgCtiA1SKHSDy8gICDPRDBOZqiOVnDYzkWRiMpev");*/
+
+define("PROJECTS_ID",13781550);
+define("PROJECTS_TOKEN","5959667d7fa944cbbd4351c6cdb66158");
+
+define("MILESTONES_ID",13781571);
+define("MILESTONES_TOKEN","5aac7675bd814c799accd4ddddb2170f");
 ?>

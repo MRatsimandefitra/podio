@@ -1,5 +1,5 @@
 <?php
-	include_once 'test_webhook_245276684.php';
+	include_once 'test_webhook.php';
 ?>
 <!DOCTYPE html>
 <html>
