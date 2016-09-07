@@ -1,51 +1,44 @@
-<?php
-	include_once 'test_webhook.php';
-?>
 <!DOCTYPE html>
+<?php include_once'test_webhook.php'; ?>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
 
-	</head>
-	
-	<body>
-	<fieldset>
-		<legend> Verify </legend>
-		<form method="post" action="">
-			<input type="hidden" name="type" value="hook.verify" />
-			<p><label>hook id :</label><input type="text" name="hook_id" value="" /></p>
-			<p><label>code :</label><input type="text" name="code" /></p>
-			<input type="submit" value="verify" />
-		</form>
-	</fieldset>
-	
-	<fieldset>
-		<legend> Create </legend>
-		<form method="post" action="">
-			<input type="hidden" name="type" value="item.create" />
-			<p><label>item id :</label><input type="text" name="item_id" value="" /></p>
-			<input type="submit" value="create" />
-		</form>
-	</fieldset>
-	
-	<fieldset>
-		<legend> Update </legend>
-		<form method="post" action="">
-			<input type="hidden" name="type" value="item.update" />
-			<p><label>item id :</label><input type="text" name="item_id" value="" /></p>
-			<input type="submit" value="create" />
-		</form>
-	</fieldset>
-	
-	<fieldset>
-		<legend> Delete </legend>
-		<form method="post" action="">
-			<input type="hidden" name="type" value="item.delete" />
-			<p><label>item id :</label><input type="text" name="item_id" value="" /></p>
-			<input type="submit" value="delete" />
-		</form>
-	</fieldset>
-	
-	</body>
-	</html>
+    </head>
+
+    <body>
+        <fieldset>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <?php //echo("<pre>");var_dump($projects_Items); die();?>
+                <input type="hidden" value="item.create" name="type">
+                <input type="submit" value="Create Item">
+            </form>
+        </fieldset>
+        <fieldset>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <?php //echo(count($projects_Items)); die();?>
+                <input type="hidden" value="item.update" name="type">
+                <select name="item_id">
+                    <?php foreach ($projects_Items as $item) { ?>
+                        <option value="<?php echo($item->item_id); ?>"><?php echo($item->title); ?></option>
+                    <?php } ?>    
+                </select>
+                <input type="submit" value="Update Item">
+            </form>
+        </fieldset>
+        <fieldset>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                <?php //echo(count($projects_Items)); die();?>
+                <input type="hidden" value="item.delete" name="type">
+                <select name="item_id">
+                    <?php foreach ($projects_Items as $item) { ?>
+                        <option value="<?php echo($item->item_id); ?>"><?php echo($item->title); ?></option>
+                    <?php } ?>    
+                </select>
+                <input type="submit" value="Delete Item">
+            </form>
+        </fieldset>
+
+    </body>
+</html>

@@ -23,7 +23,7 @@ require_once('PodioAPI.php');
 //Credentials defined in config.php
 Podio::setup(CLIENT_ID, CLIENT_SECRET);
 Podio::authenticate_with_app(PROJECTS_ID, PROJECTS_TOKEN); 
-
+$projects_Items = PodioItem::filter(PROJECTS_ID);
 
 if(count($_POST) > 0){
 
@@ -34,17 +34,16 @@ if(count($_POST) > 0){
 			break;
 		case 'item.create':
 			PodioItem::create($_POST['item_id'], array('fields' => array(
-			  "category" => "New"
-			)));
-				
+			  "title" => "New project item",
+                          "category"=> "New"  
+			)));	
 			break;
 		case 'item.update':
-			
 			PodioItem::update($_POST['item_id'], array('fields' => array(
-			  "Category" => "ok"
+			  "category" => "Ok"
 			)));
 			
-			$response = json_decode(PodioItem::get($_POST['item_id']));
+			/*$response = json_decode(PodioItem::get($_POST['item_id']));
 			if($response["Category"] == "ok"){
 					Podio::authenticate_with_app(APP_ID_MILES, APP_TOKEN_MILES);
 					$item = PodioItem::get_by_app_item_id(APP_ID, $_POST['item_id']);
@@ -57,7 +56,7 @@ if(count($_POST) > 0){
 
 						$item->fields[$field_id]->values = date("Y-m-d H:i:s");
 					}
-			}
+			}*/
 			break;
 		case 'item.delete':
 		
