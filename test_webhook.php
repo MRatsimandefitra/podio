@@ -33,7 +33,7 @@ if(count($_POST) > 0){
 			PodioHook::validate($_POST['hook_id'], array('code' => $_POST['code']));
 			break;
 		case 'item.create':
-			PodioItem::create($_POST['item_id'], array('fields' => array(
+			PodioItem::create(PROJECTS_ID, array('fields' => array(
 			  "title" => "New project item",
                           "category"=> "New"  
 			)));	
@@ -43,20 +43,21 @@ if(count($_POST) > 0){
 			  "category" => "Ok"
 			)));
 			
-			/*$response = json_decode(PodioItem::get($_POST['item_id']));
-			if($response["Category"] == "ok"){
-					Podio::authenticate_with_app(APP_ID_MILES, APP_TOKEN_MILES);
-					$item = PodioItem::get_by_app_item_id(APP_ID, $_POST['item_id']);
-					PodioItem::create($_POST['item_id'], array('fields' => array(
-					  "Category" => "New",
-					)));
-					if(count(json_decode(PodioItem::get($_POST['item_id'])))){
-						$item = PodioItem::get_basic(123);
-						$field_id = 'Log';
-
-						$item->fields[$field_id]->values = date("Y-m-d H:i:s");
-					}
-			}*/
+			$item = PodioItem::get($_POST['item_id']);
+                        
+			// connet to milestones
+                        Podio::authenticate_with_app(MILESTONES_ID, MILESTONES_TOKEN);
+                        $fields = new PodioItemFieldCollection(array(
+                            new PodioTextItemField(array("external_id" => "title", "values" => array("value" => "New Milestone item"))),
+                            new PodioAppItemField(array("external_id" => "project", "values" => array("value"=> "Project", "item_id" => $_POST['item_id']))
+                        )));
+                          
+                        $milestones_item = new PodioItem(array(
+                            "app" => new PodioApp(MILESTONES_ID),
+                            "fields" => $fields
+                        ));
+                        $milestones_item->save();
+			
 			break;
 		case 'item.delete':
 		

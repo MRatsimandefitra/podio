@@ -2,6 +2,8 @@
 define("CLIENT_ID", "projects-ahz2a6");
 define("CLIENT_SECRET","5LshHw5SpdqwrHui1yCGfjAgKpcnypPzTlzdndjIYHNc7uY87kBGubGQ2gW0CZLu");
 
+define("CLIENT_MILES_ID", "milestones-8719jo");
+define("CLIENT_MILES_SECRET","SNEQ646REpGj1dQ4mQxKLuSRm82pZ2gmKlQP4hsuyx3uEavu8xvpaLefwvum6kPA");
 /*define("CLIENT_SECRET","xlbkEFBJNpeUQ3zklD8VP4ooOgCtiA1SKHSDy8gICDPRDBOZqiOVnDYzkWRiMpev");
 
 define("CLIENT_ID", "test-bg20qb");
