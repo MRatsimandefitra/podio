@@ -36,33 +36,41 @@ if(count($_POST) > 0){
 			PodioItem::create(PROJECTS_ID, array('fields' => array(
 			  "title" => "New project item",
                           "category"=> "New"  
-			)));	
+			)));
+			header("location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 			break;
 		case 'item.update':
 			PodioItem::update($_POST['item_id'], array('fields' => array(
 			  "category" => "Ok"
 			)));
-			
-			$item = PodioItem::get($_POST['item_id']);
-                        
+			$item = PodioItem::get($_POST['item_id']);    
 			// connet to milestones
-                        Podio::authenticate_with_app(MILESTONES_ID, MILESTONES_TOKEN);
-                        $fields = new PodioItemFieldCollection(array(
-                            new PodioTextItemField(array("external_id" => "title", "values" => array("value" => "New Milestone item"))),
-                            new PodioAppItemField(array("external_id" => "project", "values" => array("value"=> "Project", "item_id" => $_POST['item_id']))
-                        )));
-                          
-                        $milestones_item = new PodioItem(array(
-                            "app" => new PodioApp(MILESTONES_ID),
-                            "fields" => $fields
-                        ));
-                        $milestones_item->save();
-			
+			Podio::authenticate_with_app(MILESTONES_ID, MILESTONES_TOKEN);
+			$fields = new PodioItemFieldCollection(array(
+				new PodioTextItemField(array("external_id" => "title", "values" => array("value" => "New Milestone item"))),
+				new PodioAppItemField(array("external_id" => "project", "values" => array("value"=> "Project", "item_id" => $_POST['item_id']))
+			)));
+			  
+			$milestones_item = new PodioItem(array(
+				"app" => new PodioApp(MILESTONES_ID),
+				"fields" => $fields
+			));
+			$milestones_item->save();
+			// connct to projects
+			Podio::authenticate_with_app(PROJECTS_ID, PROJECTS_TOKEN);
+			$log="";
+			if(isset($item->fields["log-2"]->values)){
+				$log = $item->fields["log-2"]->values;
+			}
+			PodioItem::update($_POST['item_id'], array('fields' => array(
+			  "log-2" => $log."<p>".date('l jS \of F Y h:i:s A')."</p>"
+			)));
+			$item = PodioItem::get($_POST['item_id']);
+			header("location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 			break;
 		case 'item.delete':
-		
-		PodioItem::delete($_POST['item_id']);
-			// Do something. item_id is available in $_POST['item_id'] 
+			PodioItem::delete($_POST['item_id']);
+			header("location: http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 			break;
 	}
 }
